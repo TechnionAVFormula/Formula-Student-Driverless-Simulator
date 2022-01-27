@@ -8,6 +8,7 @@
 #include "rpc/rpc_error.h"
 #include <cv_bridge/cv_bridge.h>
 #include <math.h>
+#include "ip_env.h"
 
 using dseconds = std::chrono::duration<double>;
 
@@ -25,7 +26,7 @@ ros_bridge::Statistics fps_statistic;
 // settings
 std::string camera_name = "";
 double framerate = 0.0;
-std::string host_ip = "localhost";
+// std::string host_ip = "localhost";
 bool depthcamera = false;
 
 rclcpp::Time make_ts(uint64_t unreal_ts)
@@ -149,7 +150,7 @@ int main(int argc, char ** argv)
     // load settings
     camera_name = nh->declare_parameter<std::string>("camera_name", "");
     framerate = nh->declare_parameter<double>("framerate", 0.0);
-    host_ip = nh->declare_parameter<std::string>("host_ip", "localhost");
+    // host_ip = nh->declare_parameter<std::string>("host_ip", "localhost");
     depthcamera = nh->declare_parameter<bool>("depthcamera", false);    
 
     if(camera_name == "") {
@@ -165,7 +166,7 @@ int main(int argc, char ** argv)
     fps_statistic = ros_bridge::Statistics("fps");
 
     // ready airsim connection
-    msr::airlib::CarRpcLibClient client(host_ip, RpcLibPort, 5);
+    msr::airlib::CarRpcLibClient client(ip_var, RpcLibPort, 30);
     airsim_api = &client;
 
     try {

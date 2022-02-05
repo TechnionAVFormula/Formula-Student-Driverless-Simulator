@@ -30,13 +30,13 @@
                     "Enabled": true,
                     "X": 1.20, "Y": 0, "Z": 0.2,
                     "Roll": 0, "Pitch": 0, "Yaw" : 0,
-                    "NumberOfLasers": 16,
-                    "PointsPerScan": 16000,
-                    "VerticalFOVUpper": 15,
-                    "VerticalFOVLower": -15,
+                    "NumberOfLasers": 1,
+                    "PointsPerScan": 1000,
+                    "VerticalFOVUpper": 0,
+                    "VerticalFOVLower": 0,
                     "HorizontalFOVStart": -90,
                     "HorizontalFOVEnd": 90,
-                    "RotationsPerSecond": 5,
+                    "RotationsPerSecond": 10,
                     "DrawDebugPoints": false
                 },
                 "Lidar2": {
@@ -50,7 +50,7 @@
                     "VerticalFOVLower": -25,
                     "HorizontalFOVStart": -90,
                     "HorizontalFOVEnd": 90,
-                    "RotationsPerSecond": 5,
+                    "RotationsPerSecond": 10,
                     "DrawDebugPoints": false
                 },
                 "GSS" : {

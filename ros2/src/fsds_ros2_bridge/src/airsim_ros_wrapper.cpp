@@ -154,7 +154,7 @@ void AirsimROSWrapper::initialize_ros()
     airsim_client_.enableApiControl(!manual_mode, vehicle_name);
 
     if(!competition_mode_) {
-        publish_track();
+        track_publish_timer_ = nh_->create_wall_timer(dseconds{10}, std::bind(&AirsimROSWrapper::publish_track, this));
     }
 }
 

@@ -1,7 +1,6 @@
 .vscode/
 
-/docker/fsds-v2.0.0-linux/
-
+ip_env.h
 # compiled mkdocs html
 site
 

@@ -5,7 +5,13 @@ export USERNAME=fsds
 export HOST_UID=$(shell id -u)
 
 all:
-	@echo "hello"
+	@echo "usage: make [COMMAND]"
+	@echo
+	@echo "COMMAND options:"
+	@echo "    build"
+	@echo "        - builds the fsds image"
+	@echo "    run xauthority_path=<path/to/Xauthority>"
+	@echo "        - runs the simulator"
 
 help: all
 

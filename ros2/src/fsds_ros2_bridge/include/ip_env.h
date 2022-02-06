@@ -1,4 +1,2 @@
 
-#include <iostream>
-
-std::string ip_var = "<IPv4 HERE>";
+#define IP_VAR "<IPv4 HERE>"

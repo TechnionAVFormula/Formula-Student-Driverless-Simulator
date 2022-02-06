@@ -166,7 +166,7 @@ int main(int argc, char ** argv)
     fps_statistic = ros_bridge::Statistics("fps");
 
     // ready airsim connection
-    msr::airlib::CarRpcLibClient client(ip_var, RpcLibPort, 30);
+    msr::airlib::CarRpcLibClient client(IP_VAR, RpcLibPort, 30);
     airsim_api = &client;
 
     try {

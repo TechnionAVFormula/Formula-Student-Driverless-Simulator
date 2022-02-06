@@ -11,7 +11,7 @@ int main(int argc, char ** argv)
 
     // std::string host_ip = "local_host";
     // node->get_parameter("host_ip", host_ip);
-    AirsimROSWrapper airsim_ros_wrapper(node, ip_var);
+    AirsimROSWrapper airsim_ros_wrapper(node, IP_VAR);
 
     // if (airsim_ros_wrapper.is_used_lidar_timer_cb_queue_)
     // {

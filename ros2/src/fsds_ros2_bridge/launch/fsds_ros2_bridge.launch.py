@@ -1,10 +1,12 @@
 import launch
 import launch_ros.actions
-
-from os.path import expanduser
+from ament_index_python.packages import get_package_share_directory
+from os.path import expanduser, join
 import json 
 
 CAMERA_FRAMERATE = 30.0
+
+rviz_path = join(get_package_share_directory('fsds_ros2_bridge'), "rviz", "default.rviz")
 
 def generate_launch_description():
     with open(expanduser("~")+'/Formula-Student-Driverless-Simulator/settings.json', 'r') as file:
@@ -100,6 +102,13 @@ def generate_launch_description():
                     'UDP_control': launch.substitutions.LaunchConfiguration('UDP_control')
                 }
             ]
+        ),
+        launch_ros.actions.Node(
+            package='rviz2',
+            executable='rviz2', 
+            name="rviz2", 
+            output='screen',
+            arguments=['-d',str(rviz_path)]
         )
     ])
     return ld

@@ -61,22 +61,36 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /view/debug_cones_array
       Value: true
-    - Class: rviz_default_plugins/MarkerArray
+    - Class: rviz_default_plugins/Marker
       Enabled: true
-      Name: MarkerArray
+      Name: Marker
       Namespaces:
         current_path: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
+        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /spline_mapper/path_marker_array
       Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Marker
+      Namespaces:
+        current_path: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /local_spline/path_marker
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 249; 249; 249
-    Fixed Frame: fsds/map
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -118,26 +132,26 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz_default_plugins/Orbit
-      Distance: 42.89026641845703
+      Class: rviz_default_plugins/ThirdPersonFollower
+      Distance: 15.202695846557617
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 8.16796588897705
-        Y: 6.343778610229492
-        Z: 12.86734390258789
-      Focal Shape Fixed Size: true
+        X: 0
+        Y: 0
+        Z: 0
+      Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.61039799451828
-      Target Frame: <Fixed Frame>
-      Value: Orbit (rviz)
-      Yaw: 4.600399494171143
+      Pitch: 0.37039828300476074
+      Target Frame: car
+      Value: ThirdPersonFollower (rviz_default_plugins)
+      Yaw: 3.140378952026367
     Saved: ~
 Window Geometry:
   Displays:

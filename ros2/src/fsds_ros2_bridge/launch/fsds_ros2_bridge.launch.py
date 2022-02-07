@@ -6,7 +6,7 @@ import json
 
 CAMERA_FRAMERATE = 30.0
 
-rviz_path = join(get_package_share_directory('fsds_ros2_bridge'), "rviz", "default.rviz")
+rviz_path = join(get_package_share_directory('fsds_ros2_bridge'), "launch", "fsds.rviz")
 
 def generate_launch_description():
     with open(expanduser("~")+'/Formula-Student-Driverless-Simulator/settings.json', 'r') as file:
@@ -104,10 +104,9 @@ def generate_launch_description():
             ]
         ),
         launch_ros.actions.Node(
-            package='tf2_ros',
-            executable='static_transform_publisher', 
+            package='fsds_transforms',
+            executable='transform', 
             output='screen',
-            arguments=["0","0","0","0","0","0","map", "fsds/map"]
         ),
         launch_ros.actions.Node(
             package='rviz2',

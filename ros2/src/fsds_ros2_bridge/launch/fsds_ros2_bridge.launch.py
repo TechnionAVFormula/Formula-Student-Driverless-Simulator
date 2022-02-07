@@ -109,6 +109,11 @@ def generate_launch_description():
             output='screen',
         ),
         launch_ros.actions.Node(
+            package='fsds_visuals',
+            executable='track', 
+            output='screen',
+        ),
+        launch_ros.actions.Node(
             package='rviz2',
             executable='rviz2', 
             name="rviz2", 

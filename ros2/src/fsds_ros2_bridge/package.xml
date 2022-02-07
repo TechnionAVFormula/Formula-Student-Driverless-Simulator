@@ -32,6 +32,7 @@
     <!-- Custom package requirement -->
     <!-- <depend>fs_msgs</depend> -->
     <depend>fsds_transforms</depend>
+    <depend>fsds_visuals</depend>
 
     <export>
         <build_type>ament_cmake</build_type>

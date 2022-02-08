@@ -1,12 +1,14 @@
-from os.path import expanduser
+from os.path import expanduser, join
 import json 
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
-from launch.conditions import IfCondition, UnlessCondition
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration
-
 from launch_ros.actions import Node
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+
+from ament_index_python import get_package_share_directory
 
 CAMERA_FRAMERATE = 30.0
 
@@ -38,7 +40,8 @@ def generate_launch_description():
     track_arg = DeclareLaunchArgument(name='track_name', default_value='A')
     competition_arg = DeclareLaunchArgument(name='competition_mode', default_value='false')
     manual_arg = DeclareLaunchArgument(name='manual_mode', default_value='false')
-    
+    rviz_arg = DeclareLaunchArgument(name='rviz', default_value='false')
+
     bridge_node = Node(
         package='fsds_ros2_bridge',
         executable='fsds_ros2_bridge',
@@ -80,10 +83,17 @@ def generate_launch_description():
             },
         ]
     )
+
     tf_node = Node(
         package='fsds_transforms',
         executable='transform', 
         output='screen',
+    )
+
+    rviz_pkg = get_package_share_directory('launch_rviz')
+    rviz_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([rviz_pkg, '/launch/display.launch.py']),
+        condition=IfCondition(LaunchConfiguration('rviz'))
     )
 
     return LaunchDescription([
@@ -92,8 +102,11 @@ def generate_launch_description():
         track_arg,
         competition_arg,
         manual_arg,
+        rviz_arg,
         bridge_node,
+        *camera_nodes,
         tf_node,
+        rviz_launch,
     ])
 
 

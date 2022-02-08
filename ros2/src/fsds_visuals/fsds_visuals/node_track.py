@@ -74,13 +74,9 @@ class SimVisualiser(Node):
 
         # sub to track for all cone locations relative to car start point
         self.create_subscription(Track, "/testing_only/track", self.map_callback, 10)
-        # sub to odometry for car pose + velocity
-        self.create_subscription(Odometry, "/testing_only/odom", self.odom_callback, 10)
 
         # publishes rviz cone markers
         self.cone_publisher: Publisher = self.create_publisher(MarkerArray, "/fsds_visuals/track_cones", 1)
-        # publishes rviz car marker
-        self.car_publisher: Publisher = self.create_publisher(Marker, "/fsds_visuals/car_marker", 1)
 
 
     def map_callback(self, track_msg: Track):       
@@ -102,32 +98,6 @@ class SimVisualiser(Node):
         # create message for all cones on the track
         markers_msg = MarkerArray(markers=markers_list)
         self.cone_publisher.publish(markers_msg) # publish marker points data
-
-
-    def odom_callback(self, odom_msg: Odometry):
-        # create marker for car
-        car_marker = Marker()
-        car_marker.ns = "car"
-        car_marker.id = 0
-        car_marker.type = Marker.CUBE
-        car_marker.action = Marker.ADD
-        car_marker.header.frame_id = "map"
-        car_marker.header.stamp = self.get_clock().now().to_msg()
-        # colour
-        car_marker.color.a = 1.0
-        car_marker.color.r = 0.905
-        car_marker.color.g = 0.384
-        car_marker.color.b = 0.015
-        # approx car size
-        car_marker.scale.x = 1.8
-        car_marker.scale.y = 1.0
-        car_marker.scale.z = 0.6
-        # pose
-        car_marker.pose.position = odom_msg.pose.pose.position
-        car_marker.pose.orientation = odom_msg.pose.pose.orientation
-        # update as fast as odom topic is subbed
-        car_marker.lifetime = Duration(sec=0, nanosec=4200)
-        self.car_publisher.publish(car_marker) # publish marker points data
 
 
 def main():

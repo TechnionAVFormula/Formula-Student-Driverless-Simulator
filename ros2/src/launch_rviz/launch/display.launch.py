@@ -14,7 +14,7 @@ def generate_launch_description():
     urdf_path = os.path.join(get_package_share_path('launch_rviz'), "urdf", "car.urdf")
     rviz_path = os.path.join(get_package_share_path('launch_rviz'), "rviz", "fsds.rviz")
 
-    gui_arg = DeclareLaunchArgument(name='gui', default_value='true', choices=['true', 'false'],
+    gui_arg = DeclareLaunchArgument(name='gui', default_value='false', choices=['true', 'false'],
                                     description='Flag to enable joint_state_publisher_gui')
     model_arg = DeclareLaunchArgument(name='model', default_value=str(urdf_path),
                                       description='Absolute path to robot urdf file')

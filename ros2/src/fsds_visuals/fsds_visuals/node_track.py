@@ -60,6 +60,7 @@ def marker_msg(
         marker.color.r = 0.901
         marker.color.g = 0.309
         marker.color.b = 0.039
+        marker.pose.position.z = 0.225 # is taller
         marker.scale.z = 0.45
     marker.color.a = 1.0 # alpha
     

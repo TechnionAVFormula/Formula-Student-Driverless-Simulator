@@ -187,22 +187,14 @@ void AirsimROSWrapper::create_ros_pubs_from_settings_json()
         global_gps_pub = nh_->create_publisher<sensor_msgs::msg::NavSatFix>("gps", 10);
         imu_pub = nh_->create_publisher<sensor_msgs::msg::Imu>("imu", 10);
         gss_pub = nh_->create_publisher<geometry_msgs::msg::TwistStamped>("gss", 10);
-
-        bool UDP_control;
-        nh_->get_parameter("UDP_control", UDP_control);
-
-        if(UDP_control){
-            control_cmd_sub = nh_->create_subscription<fs_msgs::msg::ControlCommand>("control_command", 1, std::bind(&AirsimROSWrapper::car_control_cb, this, std::placeholders::_1));
-        } else {
-            control_cmd_sub = nh_->create_subscription<fs_msgs::msg::ControlCommand>("control_command", 1, std::bind(&AirsimROSWrapper::car_control_cb, this, std::placeholders::_1));
-        }
-
         if(!competition_mode_) {
             odom_pub = nh_->create_publisher<nav_msgs::msg::Odometry>("testing_only/odom", 10);
             track_pub = nh_->create_publisher<fs_msgs::msg::Track>("testing_only/track", 10);
 			extra_info_pub = nh_->create_publisher<fs_msgs::msg::ExtraInfo>("testing_only/extra_info", 10);
         }
-        
+
+        control_cmd_sub = nh_->create_subscription<fs_msgs::msg::ControlCommand>("control_command", 1, std::bind(&AirsimROSWrapper::car_control_cb, this, std::placeholders::_1));
+
         // iterate over camera map std::map<std::string, CameraSetting> cameras;
         for (auto& curr_camera_elem : vehicle_setting->cameras)
         {

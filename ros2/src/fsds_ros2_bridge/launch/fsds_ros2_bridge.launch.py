@@ -1,12 +1,14 @@
-import launch
-import launch_ros.actions
-from ament_index_python.packages import get_package_share_directory
-from os.path import expanduser, join
+from os.path import expanduser
 import json 
 
-CAMERA_FRAMERATE = 30.0
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition, UnlessCondition
+from launch.substitutions import LaunchConfiguration
 
-rviz_path = join(get_package_share_directory('fsds_ros2_bridge'), "launch", "fsds.rviz")
+from launch_ros.actions import Node
+
+CAMERA_FRAMERATE = 30.0
 
 def generate_launch_description():
     with open(expanduser("~")+'/Formula-Student-Driverless-Simulator/settings.json', 'r') as file:
@@ -17,7 +19,7 @@ def generate_launch_description():
         print('no cameras configured in ~/Formula-Student-Driverless-Simulator/settings.json')
 
     camera_nodes = [
-        launch_ros.actions.Node(
+        Node(
             package='fsds_ros2_bridge',
             executable='fsds_ros2_bridge_camera',
             namespace="fsds/camera", 
@@ -27,101 +29,72 @@ def generate_launch_description():
                 {'camera_name': camera_name},
                 {'depthcamera': camera_config["CaptureSettings"][0]["ImageType"] == 2},
                 {'framerate': CAMERA_FRAMERATE},
-                {'host_ip': launch.substitutions.LaunchConfiguration('host')},
+                {'host_ip': LaunchConfiguration('host')},
             ]
         ) for camera_name, camera_config in camera_configs.items()]
 
-    ld = launch.LaunchDescription([
+    host_arg = DeclareLaunchArgument(name='host',default_value='localhost')
+    mission_arg = DeclareLaunchArgument(name='mission_name', default_value='trackdrive')
+    track_arg = DeclareLaunchArgument(name='track_name', default_value='A')
+    competition_arg = DeclareLaunchArgument(name='competition_mode', default_value='false')
+    manual_arg = DeclareLaunchArgument(name='manual_mode', default_value='false')
+    
+    bridge_node = Node(
+        package='fsds_ros2_bridge',
+        executable='fsds_ros2_bridge',
+        name='ros_bridge',
+        output='screen',
+        parameters=[
+            {
+                'update_odom_every_n_sec': 0.004
+            },
+            {
+                'update_imu_every_n_sec': 0.004
+            },
+            {
+                'update_gps_every_n_sec': 0.1
+            },
+            {
+                'update_gss_every_n_sec': 0.01
+            },
+            {
+                'publish_static_tf_every_n_sec': 1.0
+            },
+            {
+                'update_lidar_every_n_sec': 0.1
+            },
+            {
+                'host_ip': LaunchConfiguration('host')
+            },
+            {
+                'mission_name': LaunchConfiguration('mission_name')
+            },
+            {
+                'track_name': LaunchConfiguration('track_name')
+            },
+            {
+                'competition_mode': LaunchConfiguration('competition_mode')
+            },
+            {
+                'manual_mode': LaunchConfiguration('manual_mode')
+            },
+        ]
+    )
+    tf_node = Node(
+        package='fsds_transforms',
+        executable='transform', 
+        output='screen',
+    )
 
-        launch.actions.DeclareLaunchArgument(
-            name='host',
-            default_value='localhost'
-        ),
-        launch.actions.DeclareLaunchArgument(
-            name='mission_name',
-            default_value='trackdrive'
-        ),
-        launch.actions.DeclareLaunchArgument(
-            name='track_name',
-            default_value='A'
-        ),
-        launch.actions.DeclareLaunchArgument(
-            name='competition_mode',
-            default_value='false'
-        ),
-        launch.actions.DeclareLaunchArgument(
-            name='manual_mode',
-            default_value='false'
-        ),
-        launch.actions.DeclareLaunchArgument(
-            name='UDP_control',
-            default_value='false'
-        ),
-        *camera_nodes,
-        launch_ros.actions.Node(
-            package='fsds_ros2_bridge',
-            executable='fsds_ros2_bridge',
-            name='ros_bridge',
-            output='screen',
-            on_exit=launch.actions.Shutdown(),
-            parameters=[
-                {
-                    'update_odom_every_n_sec': 0.004
-                },
-                {
-                    'update_imu_every_n_sec': 0.004
-                },
-                {
-                    'update_gps_every_n_sec': 0.1
-                },
-                {
-                    'update_gss_every_n_sec': 0.01
-                },
-                {
-                    'publish_static_tf_every_n_sec': 1.0
-                },
-                {
-                    'update_lidar_every_n_sec': 0.1
-                },
-                {
-                    'host_ip': launch.substitutions.LaunchConfiguration('host')
-                },
-                {
-                    'mission_name': launch.substitutions.LaunchConfiguration('mission_name')
-                },
-                {
-                    'track_name': launch.substitutions.LaunchConfiguration('track_name')
-                },
-                {
-                    'competition_mode': launch.substitutions.LaunchConfiguration('competition_mode')
-                },
-                {
-                    'manual_mode': launch.substitutions.LaunchConfiguration('manual_mode')
-                },
-                {
-                    'UDP_control': launch.substitutions.LaunchConfiguration('UDP_control')
-                }
-            ]
-        ),
-        launch_ros.actions.Node(
-            package='fsds_transforms',
-            executable='transform', 
-            output='screen',
-        ),
-        launch_ros.actions.Node(
-            package='fsds_visuals',
-            executable='track', 
-            output='screen',
-        ),
-        launch_ros.actions.Node(
-            package='rviz2',
-            executable='rviz2', 
-            name="rviz2", 
-            output='screen',
-            arguments=['-d',str(rviz_path)]
-        ),
+    return LaunchDescription([
+        host_arg,
+        mission_arg,
+        track_arg,
+        competition_arg,
+        manual_arg,
+        bridge_node,
+        tf_node,
     ])
-    return ld
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@
     <version>0.0.0</version>
     <description>Publishes FSDS visuals for RVIZ2</description>
     <maintainer email="team@qutmotorsport.com">Alastair Bradford</maintainer>
-    <license>MIT</license>
+    <license>GPLv2</license>
 
     <depend>fs_msgs</depend>
 

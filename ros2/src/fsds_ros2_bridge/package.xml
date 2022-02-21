@@ -15,7 +15,6 @@
     <build_depend>nav_msgs</build_depend>
     <build_depend>rclcpp</build_depend>
     <build_depend>sensor_msgs</build_depend>
-    <build_depend>fs_msgs</build_depend>
     <build_depend>std_msgs</build_depend>
     <build_depend>tf2</build_depend>
     <build_depend>tf2_ros</build_depend>
@@ -30,9 +29,10 @@
 
     <!-- Dependencies covered in QUTMS Driverless Conda environment -->
     <!-- Custom package requirement -->
-    <!-- <depend>fs_msgs</depend> -->
+    <depend>fs_msgs</depend>
     <depend>fsds_transforms</depend>
     <depend>fsds_visuals</depend>
+    <depend>launch_rviz</depend>
 
     <export>
         <build_type>ament_cmake</build_type>

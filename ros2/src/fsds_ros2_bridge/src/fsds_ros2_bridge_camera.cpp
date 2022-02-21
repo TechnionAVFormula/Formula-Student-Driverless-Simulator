@@ -179,7 +179,7 @@ int main(int argc, char ** argv)
     }
 
     // ready topic
-    image_pub = nh->create_publisher<sensor_msgs::msg::Image>("/fsds/" + camera_name, 1);
+    image_pub = nh->create_publisher<sensor_msgs::msg::Image>(camera_name, 1);
 
     // start the loop
     rclcpp::TimerBase::SharedPtr imageTimer = nh->create_wall_timer(dseconds { 1/framerate }, depthcamera ? &doDepthImageUpdate : &doImageUpdate);

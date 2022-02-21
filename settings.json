@@ -59,12 +59,12 @@
                 }
             },
             "Cameras": {
-                "cam1": {
+                "image_rect_color": {
                     "CaptureSettings": [{
                         "ImageType": 0,
-                        "Width": 785,
-                        "Height": 785,
-                        "FOV_Degrees": 90
+                        "Width": 640,
+                        "Height": 360,
+                        "FOV_Degrees": 100
                     }],
                     "X": -0.5,
                     "Y": 0,
@@ -73,12 +73,12 @@
                     "Roll": 0.0,
                     "Yaw": 0
                 },
-                "cam2": {
+                "depth_registered": {
                     "CaptureSettings": [{
-                        "ImageType": 0,
-                        "Width": 1920,
-                        "Height": 1080,
-                        "FOV_Degrees": 90
+                        "ImageType": 2,
+                        "Width": 640,
+                        "Height": 360,
+                        "FOV_Degrees": 100
                     }],
                     "X": -0.5,
                     "Y": 0,

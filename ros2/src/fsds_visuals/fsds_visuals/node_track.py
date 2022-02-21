@@ -5,9 +5,8 @@ from rclpy.publisher import Publisher
 # import ROS2 message libraries
 from visualization_msgs.msg import Marker, MarkerArray
 from builtin_interfaces.msg import Duration
-from nav_msgs.msg import Odometry
 # import custom message libraries
-from fs_msgs.msg import Track, Cone
+from fs_msgs.msg import Track
 
 # other python modules
 from typing import List

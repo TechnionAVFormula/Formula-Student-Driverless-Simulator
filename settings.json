@@ -64,7 +64,7 @@
                         "ImageType": 0,
                         "Width": 640,
                         "Height": 360,
-                        "FOV_Degrees": 110
+                        "FOV_Degrees": 90
                     }],
                     "X": -0.5,
                     "Y": 0,
@@ -78,7 +78,7 @@
                         "ImageType": 2,
                         "Width": 640,
                         "Height": 360,
-                        "FOV_Degrees": 110
+                        "FOV_Degrees": 90
                     }],
                     "X": -0.5,
                     "Y": 0,

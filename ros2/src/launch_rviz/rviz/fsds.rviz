@@ -9,7 +9,9 @@ Panels:
         - /Marker1
         - /Marker2
         - /RobotModel1
-        - /RobotModel1/Links1
+        - /MarkerArray2
+        - /MarkerArray3
+        - /MarkerArray4
       Splitter Ratio: 0.5
     Tree Height: 858
   - Class: rviz_common/Selection
@@ -101,7 +103,22 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        right_leg:
+        fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rr:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -111,6 +128,45 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        covariance_markers: true
+        point_markers: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /fusion/lidar_marker
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        covariance_markers: true
+        point_markers: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /fusion/vision_marker
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        covariance_markers: true
+        point_markers: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /fusion/filtered_marker
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 249; 249; 249
@@ -172,10 +228,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4403983950614929
+      Pitch: 0.4753987789154053
       Target Frame: car
       Value: ThirdPersonFollower (rviz_default_plugins)
-      Yaw: 3.6853833198547363
+      Yaw: 3.1253793239593506
     Saved: ~
 Window Geometry:
   Displays:

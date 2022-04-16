@@ -174,11 +174,12 @@ RpcLibServerBase::RpcLibServerBase(ApiProvider* api_provider, const std::string&
         //Reset
         resetInProgress = true;
         auto* sim_world_api = getWorldSimApi();
-        if (sim_world_api)
+        if (sim_world_api) {
             sim_world_api->reset();
-        else
+        } else {
             getVehicleApi("")->reset();
             resetInProgress = false;
+        }
     });
 
     pimpl_->server.bind("simPrintLogMessage", [&](const std::string& message, const std::string& message_param, unsigned char severity) -> void {

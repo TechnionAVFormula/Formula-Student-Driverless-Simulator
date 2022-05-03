@@ -37,3 +37,10 @@ If you make changes to the plugin code or AirLib, you only have to recompile the
 3. Choose 'File' -> 'Package Project' -> 'Linux'
 4. Select home/ue4/Formula-Student-Driverless-Simulator/export
 5. Wait until it finishes (will probably take >15 minutes).
+
+
+# Running Exported Project
+Inside UE4 container:
+```
+~/Formula-Student-Driverless-Simulator/export/LinuxNoEditor/Blocks.sh -windowed -ResX=1080 -ResY=720
+```

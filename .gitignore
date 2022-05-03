@@ -7,3 +7,6 @@ site
 # compiled python files
 *.pyc
 __pycache__/
+
+# export folder
+export/

@@ -25,7 +25,7 @@ cd ~/Formula-Student-Driverless-Simulator/AirSim
 
 When asked to rebuild the 'Blocks' and 'AirSim' modules, choose 'Yes'. This is the step where the plugin part of AirSim is compiled.
 
-After it builds, it should give you and UE4 editor.
+After it builds, it should give you a UE4 editor.
 
 If you make changes to AirLib you have to run build.sh again.
 
@@ -40,6 +40,10 @@ If you make changes to the plugin code or AirLib, you only have to recompile the
 
 
 # Running Exported Project
+```
+make run_ue4 xauthority_path=<path/to/Xauthority>
+```
+
 Inside UE4 container:
 ```
 ~/Formula-Student-Driverless-Simulator/export/LinuxNoEditor/Blocks.sh -windowed -ResX=1080 -ResY=720

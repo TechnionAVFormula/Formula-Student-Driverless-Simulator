@@ -17,6 +17,7 @@ public:
     struct Output {
         TTimePoint time_stamp;
         Vector3r linear_velocity;
+        Vector3r angular_velocity;
     };
 
 public:
@@ -27,17 +28,14 @@ public:
         const GroundTruth& ground_truth = getGroundTruth();
 
         output.time_stamp = clock()->nowNanos();
+        output.angular_velocity = ground_truth.kinematics->twist.angular;
         output.linear_velocity = ground_truth.kinematics->twist.linear;
 
-        // convert linear velocity into car coordinate frame
-        auto yaw = getYaw(ground_truth.kinematics->pose.orientation);
-        float translated_x = output.linear_velocity.x()*cos(yaw) + output.linear_velocity.y()*sin(yaw);
-        float translated_y = -output.linear_velocity.x()*sin(yaw) + output.linear_velocity.y()*cos(yaw);
-        output.linear_velocity.x() = translated_x;
-        output.linear_velocity.y() = translated_y;
-        output.linear_velocity.z() = 0;
-        // output.linear_velocity.z() = yaw; // for debug
-
+        // velocity is in world frame so transform to body frame
+        output.linear_velocity = VectorMath::transformToBodyFrame(
+            output.linear_velocity, ground_truth.kinematics->pose.orientation, true
+        );
+        
         output_ = output;
     }
     const Output& getOutput() const

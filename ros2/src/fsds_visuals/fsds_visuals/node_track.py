@@ -1,15 +1,37 @@
-# import ROS2 libraries
 import rclpy
 from rclpy.node import Node
 from rclpy.publisher import Publisher
-# import ROS2 message libraries
 from visualization_msgs.msg import Marker, MarkerArray
 from builtin_interfaces.msg import Duration
-# import custom message libraries
-from fs_msgs.msg import Track
+from fs_msgs.msg import Track, Cone
+from sensor_msgs.msg import Image
 
-# other python modules
+from cv_bridge import CvBridge
+import cv2
+import numpy as np
+
 from typing import List
+from .point import Point
+
+# translate ROS image messages to OpenCV
+cv_bridge = CvBridge()
+
+# image display geometry
+SCALE = 4
+HEIGHT = (10 + 170) * SCALE
+WIDTH = (50 + 50) * SCALE
+
+def coord_to_img(x: float, y: float) -> Point:
+    """
+    Converts a relative depth from the camera into image coords
+    * param x: x coord
+    * param y: y coord
+    * return: Point int pixel coords
+    """
+    return Point(
+        int(round(50 * SCALE + x * SCALE)),
+        int(round(170 * SCALE - y * SCALE)),
+    )
 
 
 def marker_msg(
@@ -77,6 +99,8 @@ class SimVisualiser(Node):
 
         # publishes rviz cone markers
         self.cone_publisher: Publisher = self.create_publisher(MarkerArray, "/fsds_visuals/track_cones", 1)
+        # map cone loc publisher
+        self.real_map_img_publisher: Publisher = self.create_publisher(Image, "/fsds_visuals/map_image", 1)
 
 
     def map_callback(self, track_msg: Track):       
@@ -99,17 +123,30 @@ class SimVisualiser(Node):
         markers_msg = MarkerArray(markers=markers_list)
         self.cone_publisher.publish(markers_msg) # publish marker points data
 
+        # track cone list is taken as coords relative to the initial car position
+        track = track_msg.track
+        map_img = np.zeros((HEIGHT, WIDTH, 3), dtype=np.uint8)
+        for cone in track:
+            if cone.color == Cone.BLUE:
+                disp_col = (255, 0, 0)
+            elif cone.color == Cone.YELLOW:
+                disp_col = (0, 255, 255)
+            elif cone.color == Cone.ORANGE_BIG:
+                disp_col = (0, 100, 255)
+
+            cv2.drawMarker(
+                map_img,
+                coord_to_img(cone.location.x, cone.location.y).to_tuple(),
+                disp_col,
+                markerType=cv2.MARKER_TRIANGLE_UP,
+                markerSize=6,
+                thickness=2,
+            )
+        self.real_map_img_publisher.publish(cv_bridge.cv2_to_imgmsg(map_img, encoding="bgr8"))
 
 def main():
-    # begin ros node
     rclpy.init()
-
     node = SimVisualiser()
     rclpy.spin(node)
-    
     node.destroy_node()
-
     rclpy.shutdown()
-
-if __name__ == '__main__':
-    main()

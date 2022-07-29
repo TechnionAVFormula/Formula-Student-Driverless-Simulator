@@ -74,16 +74,16 @@ def marker_msg(
         marker.color.g = 0.0
         marker.color.b = 1.0
     elif colour == 1: # yellow cone
-        marker.color.r = 0.901
-        marker.color.g = 0.858
-        marker.color.b = 0.039
+        marker.color.r = 1.0
+        marker.color.g = 1.0
+        marker.color.b = 0.0
     elif colour == 2: # orange cone
-        marker.color.r = 0.901
-        marker.color.g = 0.309
-        marker.color.b = 0.039
+        marker.color.r = 1.0
+        marker.color.g = 0.3
+        marker.color.b = 0.0
         marker.pose.position.z = 0.225 # is taller
         marker.scale.z = 0.45
-    marker.color.a = 1.0 # alpha
+    marker.color.a = 0.6 # alpha
     
     marker.lifetime = Duration(sec=10, nanosec=100000)
 

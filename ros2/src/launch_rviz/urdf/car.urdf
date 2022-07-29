@@ -61,25 +61,25 @@
 
 
     <joint name="car_to_fr" type="fixed">
-        <parent link="car"/>
+        <parent link="FSCar"/>
         <child link="fr"/>
         <origin xyz="0 0 0"/>
     </joint>
 
     <joint name="car_to_fl" type="fixed">
-        <parent link="car"/>
+        <parent link="FSCar"/>
         <child link="fl"/>
         <origin xyz="0 0 0"/>
     </joint>
 
     <joint name="car_to_rr" type="fixed">
-        <parent link="car"/>
+        <parent link="FSCar"/>
         <child link="rr"/>
         <origin xyz="0 0 0"/>
     </joint>
 
     <joint name="car_to_rl" type="fixed">
-        <parent link="car"/>
+        <parent link="FSCar"/>
         <child link="rl"/>
         <origin xyz="0 0 0"/>
     </joint>

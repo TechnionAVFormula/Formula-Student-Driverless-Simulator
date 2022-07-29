@@ -28,7 +28,7 @@ class TF2Publisher(Node):
         # corresponding tf variables
         t.header.stamp = self.get_clock().now().to_msg()
         t.header.frame_id = 'map'
-        t.child_frame_id = 'car'
+        t.child_frame_id = 'fsds/FSCar'
 
         t.transform.translation.x = pose.position.x
         t.transform.translation.y = pose.position.y

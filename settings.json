@@ -28,7 +28,7 @@
                 "Lidar1": {
                     "SensorType": 6,
                     "Enabled": true,
-                    "X": 0.8, "Y": 0, "Z": 0.05,
+                    "X": 1.65, "Y": 0, "Z": 0.05,
                     "Roll": 0, "Pitch": 0, "Yaw" : 0,
                     "NumberOfLasers": 1,
                     "PointsPerScan": 1000,
@@ -42,7 +42,7 @@
                 "Lidar2": {
                     "SensorType": 6,
                     "Enabled": true,
-                    "X": 0.8, "Y": 0, "Z": 0.05,
+                    "X": 1.65, "Y": 0, "Z": 0.05,
                     "Roll": 0, "Pitch": 0, "Yaw" : 0,
                     "NumberOfLasers": 32,
                     "PointsPerScan": 32000,

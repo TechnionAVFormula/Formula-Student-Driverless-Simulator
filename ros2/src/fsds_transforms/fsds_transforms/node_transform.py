@@ -32,7 +32,7 @@ class TF2Publisher(Node):
 
         t.transform.translation.x = pose.position.x
         t.transform.translation.y = pose.position.y
-        t.transform.translation.z = 0.3
+        t.transform.translation.z = pose.position.z
         t.transform.rotation = pose.orientation
 
         # Send the transformation

@@ -27,12 +27,8 @@
     <exec_depend>sensor_msgs</exec_depend>
     <exec_depend>std_msgs</exec_depend>
 
-    <!-- Dependencies covered in QUTMS Driverless Conda environment -->
     <!-- Custom package requirement -->
     <depend>fs_msgs</depend>
-    <depend>fsds_transforms</depend>
-    <depend>fsds_visuals</depend>
-    <depend>launch_rviz</depend>
 
     <export>
         <build_type>ament_cmake</build_type>

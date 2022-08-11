@@ -423,9 +423,10 @@ void AirsimROSWrapper::car_control_cb(const fs_msgs::msg::ControlCommand& msg)
 {
     ros_bridge::ROSMsgCounter counter(&control_cmd_sub_statistics);
 
-    // Only allow positive braking and throttle commands to be passed through
+    // Only allow positive braking commands to be passed through
     CarApiBase::CarControls controls;
-    controls.throttle = msg.throttle < 0.0 ? 0.0 : msg.throttle;
+    if (msg.throttle < 0.0) controls.set_throttle(msg.throttle, false);
+    else controls.throttle = msg.throttle;
     controls.steering = msg.steering;
     controls.brake = msg.brake < 0.0 ? 0.0 : msg.brake;
     rclcpp::Time time = msg.header.stamp;

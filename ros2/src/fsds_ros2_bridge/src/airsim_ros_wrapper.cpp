@@ -192,7 +192,7 @@ void AirsimROSWrapper::create_ros_pubs_from_settings_json()
         clock_pub = nh_->create_publisher<rosgraph_msgs::msg::Clock>("/clock", 10);
         global_gps_pub = nh_->create_publisher<sensor_msgs::msg::NavSatFix>("/fsds/gps", 10);
         imu_pub = nh_->create_publisher<sensor_msgs::msg::Imu>("/fsds/imu", 10);
-        gss_pub = nh_->create_publisher<geometry_msgs::msg::TwistStamped>("/fsds/gss", 10);
+        gss_pub = nh_->create_publisher<geometry_msgs::msg::TwistWithCovarianceStamped>("/fsds/gss", 10);
         wheel_states_pub = nh_->create_publisher<fs_msgs::msg::WheelStates>("/fsds/wheel_states", 10);
 
         bool UDP_control;

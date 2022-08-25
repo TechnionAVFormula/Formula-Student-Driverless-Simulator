@@ -5,6 +5,9 @@
 #include <sstream>
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <cmath>
+#include <vector>
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
@@ -24,9 +27,6 @@ class AIRSIM_API Ucustom_map_loader : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	
-
-	UFUNCTION(BlueprintCallable, Category = "custom map loader")
-		static bool FileSaveString(FString SaveTextB, FString FileNameB);
 
 	UFUNCTION(BlueprintCallable, Category = "custom map loader")
 		static bool FileLoadString(FString FileNameA, FString& SaveTextA);

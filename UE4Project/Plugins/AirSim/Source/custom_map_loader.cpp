@@ -5,6 +5,7 @@
 
 static FString custom_map_path;
 
+
 bool Ucustom_map_loader::FileLoadString(FString FileNameA, FString& SaveTextA)
 {
 	const TCHAR* file = *FileNameA;
@@ -40,6 +41,7 @@ TArray<FString> Ucustom_map_loader::ProcessFile(FString data, TArray<FTransform>
 
 	lines.Add(right);
 
+	// Process each line
 	for (FString& line : lines) {
 		FString value = "";
 

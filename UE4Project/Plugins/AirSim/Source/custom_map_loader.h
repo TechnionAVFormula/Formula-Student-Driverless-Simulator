@@ -28,6 +28,7 @@ class AIRSIM_API Ucustom_map_loader : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 	
 
+
 	UFUNCTION(BlueprintCallable, Category = "custom map loader")
 		static bool FileLoadString(FString FileNameA, FString& SaveTextA);
 

@@ -2,6 +2,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include <sensor_msgs/msg/image.hpp>
 #include <sensor_msgs/msg/camera_info.hpp>
+#include <sensor_msgs/msg/camera_info.hpp>
 #include "common/AirSimSettings.hpp"
 #include "common/Common.hpp"
 #include "vehicles/car/api/CarRpcLibClient.hpp"
@@ -170,7 +171,8 @@ int main(int argc, char ** argv)
     camera_name = nh->declare_parameter<std::string>("camera_name", "");
     framerate = nh->declare_parameter<double>("framerate", 0.0);
     host_ip = nh->declare_parameter<std::string>("host_ip", "localhost");
-    depthcamera = nh->declare_parameter<bool>("depthcamera", false);
+    depthcamera = nh->declare_parameter<bool>("depthcamera", false);    
+    std::cout << "IP: " << host_ip << std::endl;
 
     if(camera_name == "") {
         RCLCPP_FATAL(nh->get_logger(), "camera_name unset.");

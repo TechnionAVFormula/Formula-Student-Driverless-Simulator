@@ -1,10 +1,6 @@
 #include "rclcpp/rclcpp.hpp"
 #include "airsim_ros_wrapper.h"
 // #include <ros/spinner.h>
-#include <iostream>
-
-
-std::string host_ip = "localhost";
 
 int main(int argc, char ** argv)
 {
@@ -12,6 +8,8 @@ int main(int argc, char ** argv)
     std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("fsds_ros2_bridge"); 
 
     std::string host_ip = node->declare_parameter<std::string>("host_ip", "localhost");
+
+    RCLCPP_INFO_STREAM(node->get_logger(), "IP: " << host_ip.c_str());
 
     AirsimROSWrapper airsim_ros_wrapper(node, host_ip);
 

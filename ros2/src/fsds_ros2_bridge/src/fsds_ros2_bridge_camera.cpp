@@ -25,11 +25,8 @@ rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr image_pub;
 rclcpp::Publisher<sensor_msgs::msg::CameraInfo>::SharedPtr info_pub;
 ros_bridge::Statistics fps_statistic;
 
-// settings
+// global camera name
 std::string camera_name = "";
-double framerate = 0.0;
-std::string host_ip = "localhost";
-bool depthcamera = false;
 
 rclcpp::Time make_ts(uint64_t unreal_ts)
 {
@@ -169,10 +166,11 @@ int main(int argc, char ** argv)
 
     // load settings
     camera_name = nh->declare_parameter<std::string>("camera_name", "");
-    framerate = nh->declare_parameter<double>("framerate", 0.0);
-    host_ip = nh->declare_parameter<std::string>("host_ip", "localhost");
-    depthcamera = nh->declare_parameter<bool>("depthcamera", false);    
-    std::cout << "IP: " << host_ip << std::endl;
+    double framerate = nh->declare_parameter<double>("framerate", 0.0);
+    std::string host_ip = nh->declare_parameter<std::string>("host_ip", "localhost");
+    bool depthcamera = nh->declare_parameter<bool>("depthcamera", false);    
+    
+    RCLCPP_INFO_STREAM(nh->get_logger(), "IP: " << host_ip.c_str());
 
     if(camera_name == "") {
         RCLCPP_FATAL(nh->get_logger(), "camera_name unset.");
@@ -191,9 +189,9 @@ int main(int argc, char ** argv)
     airsim_api = &client;
 
     try {
-        std::cout << "Waiting for connection - " << std::endl;
+        RCLCPP_INFO(nh->get_logger(), "Waiting for connection...");
         airsim_api->confirmConnection();
-        std::cout << "Connected to the simulator!" << std::endl;
+        RCLCPP_INFO(nh->get_logger(), "Connected to the simulator!");
     } catch (const std::exception &e) {
         std::string msg = e.what();
         RCLCPP_ERROR(nh->get_logger(), "Exception raised by the API, something went wrong: %s\n", msg.c_str());

@@ -2,7 +2,6 @@
 #include "rclcpp/rclcpp.hpp"
 #include <sensor_msgs/msg/image.hpp>
 #include <sensor_msgs/msg/camera_info.hpp>
-#include <sensor_msgs/msg/camera_info.hpp>
 #include "common/AirSimSettings.hpp"
 #include "common/Common.hpp"
 #include "vehicles/car/api/CarRpcLibClient.hpp"

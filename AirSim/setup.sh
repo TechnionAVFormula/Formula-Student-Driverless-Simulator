@@ -31,7 +31,7 @@ if [ "$VERSION" -lt "20" ]; then
     chmod +x llvm.sh
     sudo ./llvm.sh 12
 fi
-sudo apt-get install -y clang-14 clang++-14 libc++-14-dev libc++abi-14-dev
+sudo apt-get install -y clang-12 clang++-12 libc++-12-dev libc++abi-12-dev
 
 #install additional tools
 sudo apt-get install -y build-essential

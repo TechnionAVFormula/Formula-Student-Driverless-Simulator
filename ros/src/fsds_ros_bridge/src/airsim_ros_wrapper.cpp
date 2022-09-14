@@ -12,9 +12,11 @@ AirsimROSWrapper::AirsimROSWrapper(const ros::NodeHandle& nh, const ros::NodeHan
 {
     initialize_airsim(timeout_sec);
     try {
-        auto settingsText = this->readTextFromFile(common_utils::FileSystem::getConfigFilePath());
-        msr::airlib::AirSimSettings::initializeSettings(settingsText);
+        ROS_INFO_STREAM("READING SETTINGS");
+        std::string settings_text = airsim_client_.getSettingsString();
+        ROS_INFO_STREAM("SETTINGS READ");
 
+        msr::airlib::AirSimSettings::initializeSettings(settings_text);
         msr::airlib::AirSimSettings::singleton().load();
         for (const auto &warning : msr::airlib::AirSimSettings::singleton().warning_messages)
         {

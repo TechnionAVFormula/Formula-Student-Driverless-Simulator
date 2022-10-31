@@ -72,6 +72,7 @@ run_exported:
 	@echo "Will only work if run_ue4 works and a project has been exported."
 	@echo "See `Exporting from UE4` in docker/README.md"
 	docker run \
+		-it \
 		--rm \
 		--privileged \
 		--net=host \

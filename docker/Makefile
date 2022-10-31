@@ -67,3 +67,18 @@ run_ue4:
 		--mount type=bind,source=/run/user/1000/gdm/Xauthority,destination=/home/ue4/.Xauthority \
 		$(UE4_IMAGE_NAME) \
 		/bin/bash
+
+run_exported:
+	@echo "Will only work if run_ue4 works and a project has been exported."
+	@echo "See `Exporting from UE4` in docker/README.md"
+	docker run \
+		--rm \
+		--privileged \
+		--net=host \
+		--gpus=all \
+		--env=DISPLAY=$(DISPLAY) \
+		--mount type=bind,source=$$(pwd)/..,destination=/home/ue4/Formula-Student-Driverless-Simulator/ \
+		--mount type=bind,source=/tmp/.X11-unix,destination=/tmp/.X11-unix \
+		--mount type=bind,source=/run/user/1000/gdm/Xauthority,destination=/home/ue4/.Xauthority \
+		$(UE4_IMAGE_NAME) \
+		/bin/bash -c "~/Formula-Student-Driverless-Simulator/export/LinuxNoEditor/Blocks.sh -windowed -ResX=1080 -ResY=720"

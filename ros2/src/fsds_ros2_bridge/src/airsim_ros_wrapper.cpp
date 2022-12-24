@@ -220,24 +220,20 @@ void AirsimROSWrapper::create_ros_pubs_from_settings_json()
 
         vehicle_name = curr_vehicle_name;
         clock_pub = nh_->create_publisher<rosgraph_msgs::msg::Clock>("/fsds/clock", 10);
-        global_gps_pub = nh_->create_publisher<sensor_msgs::msg::NavSatFix>("/fsds/gps", 10);
-        imu_pub = nh_->create_publisher<sensor_msgs::msg::Imu>("/fsds/imu", 10);
-        gss_pub = nh_->create_publisher<geometry_msgs::msg::TwistWithCovarianceStamped>("/fsds/gss", 10);
-        wheel_states_pub = nh_->create_publisher<fs_msgs::msg::WheelStates>("/fsds/wheel_states", 10);
 
         if(enabled_sensors.gps){
-            global_gps_pub = nh_->create_publisher<sensor_msgs::msg::NavSatFix>("gps", 10);
+            global_gps_pub = nh_->create_publisher<sensor_msgs::msg::NavSatFix>("fsds/gps", 10);
         }
         
         if(enabled_sensors.imu){
-            imu_pub = nh_->create_publisher<sensor_msgs::msg::Imu>("imu", 10);
+            imu_pub = nh_->create_publisher<sensor_msgs::msg::Imu>("fsds/imu", 10);
         }
 
         if(enabled_sensors.gss){
-            gss_pub = nh_->create_publisher<geometry_msgs::msg::TwistWithCovarianceStamped>("gss", 10);
+            gss_pub = nh_->create_publisher<geometry_msgs::msg::TwistWithCovarianceStamped>("fsds/gss", 10);
         }
 
-        wheel_states_pub = nh_->create_publisher<fs_msgs::msg::WheelStates>("wheel_states", 10);
+        wheel_states_pub = nh_->create_publisher<fs_msgs::msg::WheelStates>("fsds/wheel_states", 10);
 
         bool UDP_control;
         nh_->get_parameter("UDP_control", UDP_control);

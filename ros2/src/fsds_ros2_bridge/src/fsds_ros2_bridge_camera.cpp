@@ -170,15 +170,14 @@ int main(int argc, char ** argv)
 
     // load settings
     camera_name = nh->declare_parameter<std::string>("camera_name", "");
-    depthcamera = nh->declare_parameter<bool>("depthcamera", false);
-    
-    RCLCPP_INFO_STREAM(nh->get_logger(), "IP: " << host_ip.c_str());
     camera_frame_prefix = nh->declare_parameter<std::string>("camera_frame_prefix", "/fsds/");
     camera_frame_id = camera_frame_prefix + camera_name;
 
     framerate = nh->declare_parameter<double>("framerate", 0.0);
     host_ip = nh->declare_parameter<std::string>("host_ip", "localhost");
     depthcamera = nh->declare_parameter<bool>("depthcamera", false);
+    
+    RCLCPP_INFO_STREAM(nh->get_logger(), "IP: " << host_ip.c_str());
 
     if(camera_name == "") {
         RCLCPP_FATAL(nh->get_logger(), "camera_name unset.");

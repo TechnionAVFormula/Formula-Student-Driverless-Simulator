@@ -26,7 +26,7 @@ public:
     RpcLibClientBase(const string& ip_address = "localhost", uint16_t port = RpcLibPort, float timeout_sec = 60);
     virtual ~RpcLibClientBase();    //required for pimpl
 
-    void confirmConnection();
+    void confirmConnection(double timeout);
     void reset();
 
     ConnectionState getConnectionState();
@@ -101,12 +101,17 @@ public:
     msr::airlib::WheelStates simGetWheelStates(const std::string& vehicle_name = "") const;
 
 	std::vector<std::string> simSwapTextures(const std::string& tags, int tex_id = 0, int component_id = 0, int material_id = 0);
+    std::string getSettingsString() const;
 
 protected:
     void* getClient();
     const void* getClient() const;
 
 private:
+    std::string ip_address_;
+    uint16_t port_;
+    float timeout_sec_;
+
     struct impl;
     std::unique_ptr<impl> pimpl_;
 };

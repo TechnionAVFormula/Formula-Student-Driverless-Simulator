@@ -33,7 +33,7 @@ void UnrealLidarSensor::createLasers()
     laser_angles_.clear();
     for (auto i = 0u; i < params.number_of_lasers; ++i)
     {
-        const float vertical_angle = params.vertical_FOV_upper - static_cast<float>(i) * delta_angle;
+        const float vertical_angle = -(params.vertical_FOV_upper - static_cast<float>(i) * delta_angle);
         laser_angles_.emplace_back(vertical_angle);
     }
 }
@@ -79,6 +79,7 @@ void UnrealLidarSensor::getPointCloud(const msr::airlib::Pose& lidar_pose, const
                 point_cloud.emplace_back(point.x());
                 point_cloud.emplace_back(point.y());
                 point_cloud.emplace_back(point.z());
+                point_cloud.emplace_back(1.0f); // intensity
                 segmentation_cloud.emplace_back(segmentationID);
             }
         }
@@ -97,7 +98,6 @@ bool UnrealLidarSensor::shootLaser(const msr::airlib::Pose& lidar_pose, const ms
 
     // We need to compose rotations here rather than rotate a vector by a quaternion
     // Hence using coordOrientationAdd(..) rather than rotateQuaternion(..)
-
     // get ray quaternion in lidar frame (angles must be in radians)
     msr::airlib::Quaternionr ray_q_l = msr::airlib::VectorMath::toQuaternion(
         msr::airlib::Utils::degreesToRadians(vertical_angle),   //pitch - rotation around Y axis

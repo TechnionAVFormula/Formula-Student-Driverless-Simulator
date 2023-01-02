@@ -36,7 +36,6 @@ ACarPawn::ACarPawn()
 
     setupVehicleMovementComponent();
 
-
     // Create In-Car camera component 
     camera_front_center_base_ = CreateDefaultSubobject<USceneComponent>(TEXT("camera_front_center_base_"));
     camera_front_center_base_->SetRelativeLocation(FVector(200, 0, 100)); //center

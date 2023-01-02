@@ -62,6 +62,41 @@ typedef msr::airlib::AirSimSettings::CameraSetting CameraSetting;
 typedef msr::airlib::AirSimSettings::LidarSetting LidarSetting;
 typedef msr::airlib::CarApiBase CarApiBase;
 
+struct enabledSensors {
+    bool lidar = false;
+    bool camera = false;
+    bool gps = false;
+    bool gss = false;
+    bool imu = false;
+    
+    void print() {
+        std::stringstream ss;
+        std::cout << "Printing enabled sensors:" << std::endl;
+        
+        if(lidar){
+            ss << "Lidar enabled\n";
+        }
+        
+        if(camera){
+            ss << "Camera enabled\n";
+        }
+        
+        if(gps){
+            ss << "GPS enabled\n";
+        }
+        
+        if(gss){
+            ss << "GSS enabled\n";
+        }
+        
+        if(imu){
+            ss << "IMU enabled\n";
+        }
+        
+        std::cout << ss.str();
+    }
+};
+
 struct SimpleMatrix
 {
     int rows;
@@ -77,10 +112,10 @@ struct SimpleMatrix
 class AirsimROSWrapper
 {
 public:
-    AirsimROSWrapper(const std::shared_ptr<rclcpp::Node>& nh, const std::string& host_ip);
+    AirsimROSWrapper(const std::shared_ptr<rclcpp::Node>& nh, const std::string& host_ip, double timeout_sec);
     ~AirsimROSWrapper(){};
 
-    void initialize_airsim();
+    void initialize_airsim(double timeout_sec);
     void initialize_ros();
     void publish_track();
     void initialize_statistics();
@@ -115,6 +150,8 @@ private:
     // create std::vector<Statistics*> which I can use to iterate over all these options 
     // and apply common operations such as print, reset
     // std::vector<ros_bridge::Statistics*> statistics_obj_ptr;
+    
+    enabledSensors enabled_sensors;
 
     // Print all statistics
     void PrintStatistics();
@@ -184,6 +221,7 @@ private:
     bool competition_mode_;
     rclcpp::Time go_timestamp_;
 
+    std::string host_ip_;
     msr::airlib::CarRpcLibClient airsim_client_;
     msr::airlib::CarRpcLibClient airsim_client_lidar_;
 

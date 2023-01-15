@@ -1,4 +1,4 @@
-FROM ghcr.io/epicgames/unreal-engine:dev-4.27
+FROM ghcr.io/epicgames/unreal-engine:dev-slim-4.27
 
 USER root
 

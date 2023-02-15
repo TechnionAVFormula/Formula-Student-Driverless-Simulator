@@ -64,6 +64,6 @@ USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 
 # download fsds binary
-RUN wget https://github.com/FS-Driverless/Formula-Student-Driverless-Simulator/releases/download/v2.1.0/fsds-v2.1.0-linux.zip && \
-    unzip fsds-v2.1.0-linux.zip && \
-    rm fsds-v2.1.0-linux.zip
+RUN wget https://github.com/FS-Driverless/Formula-Student-Driverless-Simulator/releases/download/v2.2.0/fsds-v2.2.0-linux.zip && \
+    unzip fsds-v2.2.0-linux.zip && \
+    rm fsds-v2.2.0-linux.zip

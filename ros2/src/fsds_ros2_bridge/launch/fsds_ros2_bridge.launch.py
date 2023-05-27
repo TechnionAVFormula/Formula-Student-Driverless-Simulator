@@ -36,7 +36,7 @@ def generate_launch_description():
     mission_arg = DeclareLaunchArgument(name='mission_name', default_value='trackdrive')
     track_arg = DeclareLaunchArgument(name='track_name', default_value='A')
     competition_arg = DeclareLaunchArgument(name='competition_mode', default_value='false')
-    manual_arg = DeclareLaunchArgument(name='manual_mode', default_value='false')
+    manual_arg = DeclareLaunchArgument(name='manual_mode', default_value='true')
 
     bridge_node = Node(
         package='fsds_ros2_bridge',

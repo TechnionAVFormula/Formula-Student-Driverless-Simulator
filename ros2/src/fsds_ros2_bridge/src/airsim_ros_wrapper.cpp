@@ -468,7 +468,7 @@ void AirsimROSWrapper::car_control_cb(const fs_msgs::msg::ControlCommand& msg)
     controls.brake = msg.brake < 0.0 ? 0.0 : msg.brake;
     rclcpp::Time time = msg.header.stamp;
 
-    {
+    {	RCLCPP_INFO(nh_->get_logger(), "Trying to send control command with throttle:");
         ros_bridge::Timer timer(&setCarControlsStatistics);
         std::unique_lock<std::recursive_mutex> lck(car_control_mutex_);
         airsim_client_.setCarControls(controls, vehicle_name);

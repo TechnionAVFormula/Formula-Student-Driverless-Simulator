@@ -37,7 +37,7 @@ run_fsds:
 		--env=DISPLAY=$(DISPLAY) \
 		--env=QT_X11_NO_MITSHM=1 \
 		--env=SDL_HINT_CUDA_DEVICE='0' \
-		--mount type=bind,source=$$(pwd)/../settings.json,destination=/home/$(USERNAME)/Formula-Student-Driverless-Simulator/settings.json \
+		--mount type=bind,source=$$(pwd)/../settings.json,destination=/home/$(USERNAME)/settings.json \
 		--mount type=bind,source=/tmp/.X11-unix,destination=/tmp/.X11-unix \
 		--mount type=bind,source=$(xauthority_path),destination=/home/$(USERNAME)/.Xauthority \
 		$(FSDS_IMAGE_NAME) \

@@ -1,6 +1,6 @@
 # Technion Formula Student Driverless Simulation
 
-## [Documentation](https://fs-driverless.github.io/Formula-Student-Driverless-Simulator/) / [System overview](/docs/system-overview.md) / [Getting started guide](/docs/getting-started.md) /[How to](/python/examples/README.md) /[Chat](https://github.com/FS-Driverless/Formula-Student-Driverless-Simulator/discussions)
+## [Documentation](https://fs-driverless.github.io/Formula-Student-Driverless-Simulator/) / [System overview](/docs/system-overview.md) / [Getting started guide](/docs/getting-started.md) /[How to](/python/README.md) /[Chat](https://github.com/FS-Driverless/Formula-Student-Driverless-Simulator/discussions)
 
 ![Banner](docs/images/banner.png)
 

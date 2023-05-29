@@ -1,18 +1,13 @@
-# Formula Student Driverless Simulation
+# Technion Formula Student Driverless Simulation
 
-## [Documentation](https://fs-driverless.github.io/Formula-Student-Driverless-Simulator/) / [System overview](/docs/system-overview.md) / [Getting started guide](/docs/getting-started.md) / [Chat](https://github.com/FS-Driverless/Formula-Student-Driverless-Simulator/discussions)
+## [Documentation](https://fs-driverless.github.io/Formula-Student-Driverless-Simulator/) / [System overview](/docs/system-overview.md) / [Getting started guide](/docs/getting-started.md) /[How to](/python/examples/README.md) /[Chat](https://github.com/FS-Driverless/Formula-Student-Driverless-Simulator/discussions)
 
 ![Banner](docs/images/banner.png)
 
-This is a Formula Student Driverless Simulator (FSDS).
+This is a Fork of the Formula Student Driverless Simulator (FSDS).
 FSDS is a community project with the goal to provide an end-to-end simulation for FS Driverless teams. 
-It simulates all commonly used sensors and is compatible with ROS. 
-This project has proven itself during [FS-Online 2020](https://formulastudentonline.com/) where 4 driverless teams competed.
-See [day 1](https://www.youtube.com/watch?v=TCgKwuLo3Eo), [day 2](https://www.youtube.com/watch?v=A-RHuWMZbig) and [day 3](https://www.youtube.com/watch?v=1RwY1cNMqMg).
+It simulates all commonly used sensors and is compatible with ROS.
 
-**Problems?** Ask questions in [Gitter chat](https://gitter.im/FS-Driverless/Formula-Student-Driverless-Simulator) or [open an issue](https://github.com/FS-Driverless/Formula-Student-Driverless-Simulator/issues).
-
-FSDS has been originally developed by your friends at [Formula Student Team Delft](https://www.fsteamdelft.nl/), [MIT Driverless](http://driverless.mit.edu/) and [FSEast](https://fseast.eu).
 
 ## Repo Overview
 
@@ -37,6 +32,8 @@ When AirSim is compiled, the AirLib binaries are placed within `/UE4Project/Plug
 It launches the fsds_ros_bridge to connect an autonomous system to the Unreal world and stops the bridge when the autonomous system is no longer allowed to control the car.
 
 `/maps` contains all the custom maps created by contributors.
+
+`/docker` provides an easy and portable way to run the simulator.
 
 This repo uses LFS for some large files. All files bigger than 90MB are added to LFS.
 
